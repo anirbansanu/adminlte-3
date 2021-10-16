@@ -1,7 +1,31 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {VectorMap} from 'react-jvectormap';
+// import {
+//   DateTimePicker,
+  
+// } from "react-tempusdominus-bootstrap";
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import moment from 'moment';
+import 'bootstrap-daterangepicker/daterangepicker.css';
+
+import "./Map.css";
 
 export default class Map extends Component {
+  constructor(props) {
+        super(props);
+        this.state = {
+          start: moment().subtract(29, 'days'),
+          end: moment(),
+        }
+        this.handleDateRangePickerCallback = this.handleDateRangePickerCallback.bind(this);
+    }
+    handleDateRangePickerCallback = (start, end) => {
+      this.setState({ start, end });
+      alert(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    }
+
     render() {
+      const { start, end } = this.state;
         return (
             <div className="card bg-gradient-primary">
             <div className="card-header border-0">
@@ -11,9 +35,40 @@ export default class Map extends Component {
               </h3>
               {/* card tools */}
               <div className="card-tools">
-                <button type="button" className="btn btn-primary btn-sm daterange" data-toggle="tooltip" title="Date range">
-                  <i className="far fa-calendar-alt" />
-                </button>
+                <DateRangePicker
+                  initialSettings={{
+                    startDate: start.toDate(),
+                    endDate: end.toDate(),
+                    ranges: {
+                      Today: [moment().toDate(), moment().toDate()],
+                      Yesterday: [
+                        moment().subtract(1, 'days').toDate(),
+                        moment().subtract(1, 'days').toDate(),
+                      ],
+                      'Last 7 Days': [
+                        moment().subtract(6, 'days').toDate(),
+                        moment().toDate(),
+                      ],
+                      'Last 30 Days': [
+                        moment().subtract(29, 'days').toDate(),
+                        moment().toDate(),
+                      ],
+                      'This Month': [
+                        moment().startOf('month').toDate(),
+                        moment().endOf('month').toDate(),
+                      ],
+                      'Last Month': [
+                        moment().subtract(1, 'month').startOf('month').toDate(),
+                        moment().subtract(1, 'month').endOf('month').toDate(),
+                      ],
+                    },
+                  }}
+                  onCallback={this.handleDateRangePickerCallback}
+                >
+                  <button type="button" className="btn btn-primary btn-sm" title="Date range">
+                    <span className="pr-1">{this.state.start.format('MM/DD/YY') + ' - ' + this.state.end.format('MM/DD/YY')}</span> <i className="far fa-calendar-alt" />
+                  </button>
+                </DateRangePicker>
                 <button type="button" className="btn btn-primary btn-sm" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                   <i className="fas fa-minus" />
                 </button>
@@ -21,7 +76,30 @@ export default class Map extends Component {
               {/* /.card-tools */}
             </div>
             <div className="card-body">
-              <div id="world-map" style={{height: 250, width: '100%'}} />
+              <div  style={{height: 250, width: '100%'}} >
+                  <VectorMap 
+                          id="world-map" 
+                          map={'world_mill'}
+                          backgroundColor="transparent"
+                          ref="map"
+                          containerStyle={{
+                              width: '100%',
+                              height: '100%'
+                          }}
+                          regionStyle= {{
+                                initial: {
+                                  fill: 'rgba(255, 255, 255, 0.7)',
+                                  'fill-opacity': 1,
+                                  stroke: 'rgba(0,0,0,.2)',
+                                  'stroke-width': 1,
+                                  'stroke-opacity': 1
+                                }
+                              }
+                          }
+                            
+                          containerClassName="map"
+                  />
+              </div>
             </div>
             {/* /.card-body*/}
             <div className="card-footer bg-transparent">
