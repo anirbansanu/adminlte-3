@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { InlineDatePicker } from "react-tempusdominus-bootstrap";
 
 export default class Calendar extends Component {
     render() {
@@ -35,7 +36,8 @@ export default class Calendar extends Component {
               {/* /.card-header */}
               <div className="card-body pt-0">
                 {/*The calendar */}
-                <div id="calendar" style={{width: '100%'}} />
+                {/* <div id="calendar" style={{width: '100%'}} /> */}
+                <InlineDatePicker id="calendar" format="L"/>
               </div>
               {/* /.card-body */}
             </div>
