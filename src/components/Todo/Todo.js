@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoItems from './TodoItems';
+// import { ReactSortable } from "react-sortablejs";
 
 export default class Todo extends Component {
     constructor(props){
@@ -89,18 +90,19 @@ export default class Todo extends Component {
               </div>
               {/* /.card-header */}
               <div className="card-body">
-                <ul className="todo-list" data-widget="todo-list" id="todolist">
-                  {this.state.data.map((element) => {
-                    return <TodoItems 
-                              key = {element.modalNum}
-                              modalNum = {element.modalNum}
-                              text = {element.text}
-                              badge = {element.badge}
-                              bdgColor = {element.bdgColor}
-                            />
-                  })}
-                  
-                </ul>
+                <ul class="todo-list" data-widget="todo-list">
+                    {
+                    this.state.data.map((element) => {
+                      return <TodoItems 
+                                key = {element.modalNum}
+                                modalNum = {element.modalNum}
+                                text = {element.text}
+                                badge = {element.badge}
+                                bdgColor = {element.bdgColor}
+                              />
+                    })}
+                    
+                  </ul>
               </div>
               {/* /.card-body */}
               <div className="card-footer clearfix">

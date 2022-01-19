@@ -1,5 +1,58 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Line } from 'react-chartjs-2';
 
+const salesGraphChartData = {
+  labels: ['2011 Q1', '2011 Q2', '2011 Q3', '2011 Q4', '2012 Q1', '2012 Q2', '2012 Q3', '2012 Q4', '2013 Q1', '2013 Q2'],
+  datasets: [
+    {
+      label: 'Digital Goods',
+      fill: false,
+      borderWidth: 2,
+      lineTension: 0,
+      spanGaps: true,
+      borderColor: '#efefef',
+      pointRadius: 3,
+      pointHoverRadius: 7,
+      pointColor: '#efefef',
+      pointBackgroundColor: '#efefef',
+      data: [2666, 2778, 4912, 3767, 6810, 5670, 4820, 15073, 10687, 8432]
+    }
+  ]
+}
+
+const salesGraphChartOptions = {
+  maintainAspectRatio: false,
+  responsive: true,
+  legend: {
+    display: false,
+    labels: {
+      fontColor: "#f00"
+    }
+  },
+  scales: {
+    xAxes: [{
+      ticks: {
+        fontColor: '#f00'
+      },
+      gridLines: {
+        display: false,
+        color: '#efefef',
+        drawBorder: false
+      }
+    }],
+    yAxes: [{
+      ticks: {
+        stepSize: 5000,
+        fontColor: '#f00'
+      },
+      gridLines: {
+        display: true,
+        color: '#f00',
+        drawBorder: false
+      }
+    }]
+  }
+}
 export default class Salesgraph extends Component {
     render() {
         return (
@@ -19,7 +72,7 @@ export default class Salesgraph extends Component {
                 </div>
               </div>
               <div className="card-body">
-                <canvas className="chart" id="line-chart" style={{minHeight: 250, height: 250, maxHeight: 250, maxWidth: '100%'}} />
+                <Line className='chart chartjs-render-monitor' data={salesGraphChartData} option={salesGraphChartOptions} style={{color:"#fff", minHeight: 250, height: 250, maxHeight: 250, maxWidth: '100%'}} />
               </div>
               {/* /.card-body */}
               <div className="card-footer bg-transparent">

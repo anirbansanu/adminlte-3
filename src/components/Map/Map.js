@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {VectorMap} from 'react-jvectormap';
-// import {
-//   DateTimePicker,
-  
-// } from "react-tempusdominus-bootstrap";
+import { Sparklines,SparklinesLine } from 'react-sparklines';
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import moment from 'moment';
 import 'bootstrap-daterangepicker/daterangepicker.css';
@@ -105,17 +102,34 @@ export default class Map extends Component {
             <div className="card-footer bg-transparent">
               <div className="row">
                 <div className="col-4 text-center">
-                  <div id="sparkline-1" />
+
+                  {/* <Sparklines data={} width={30} height={20}>
+                      <SparklinesLine style={{ strokeWidth: 0.25, stroke: "#92c1dc", fill: "#ffffff" }} />
+                      
+                  </Sparklines> */}
+                  <Sparklines id="sparkline-1" data={[1000, 1200, 920, 927, 931, 1027, 819, 930, 1021]} style={{fill:'#fff'}}>
+                      <SparklinesLine color="#ffffff" fill= "#ffffff"/>
+                  </Sparklines>
+            
+                  
                   <div className="text-white">Visitors</div>
                 </div>
                 {/* ./col */}
                 <div className="col-4 text-center">
-                  <div id="sparkline-2" />
+                  <div id="sparkline-2" >
+                    <Sparklines data={[515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921]} >
+                        <SparklinesLine color="#ffffff" fill= "#ffffff"/>
+                    </Sparklines>
+                  </div>
                   <div className="text-white">Online</div>
                 </div>
                 {/* ./col */}
                 <div className="col-4 text-center">
-                  <div id="sparkline-3" />
+                  <div id="sparkline-3" >
+                    <Sparklines data={[15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21]} >
+                        <SparklinesLine color="#ffffff" fill= "#ffffff"/>
+                    </Sparklines>
+                  </div>
                   <div className="text-white">Sales</div>
                 </div>
                 {/* ./col */}

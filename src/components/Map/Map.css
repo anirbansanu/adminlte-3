@@ -44,12 +44,12 @@ svg {
 }
 
 .jvectormap-zoomin {
-    top: 10px;
+    top: 5px;
 }
 
 .jvectormap-zoomout {
     margin-top: 0.25rem;
-    top: 30px;
+    top: 25px;
 }
 
 .jvectormap-goback {
